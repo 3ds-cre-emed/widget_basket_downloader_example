@@ -1,0 +1,1714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Put this to connect netvibes -->
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:widget="http://www.netvibes.com/ns/"
+>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- CSS -->
+  <style type="text/css">
+    body {
+      font-family: "Ubuntu", sans-serif;
+    }
+
+    .dropzone {
+      margin: 0.5%;
+      width: auto;
+      height: auto;
+      border: 2px dashed #ccc;
+      color: #ccc;
+      line-height: 95vh;
+      text-align: center;
+    }
+
+    .basket {
+      margin: 0.5%;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .infoendwidget {
+      font-family: "Ubuntu", sans-serif;
+      margin: 1.5%;
+      width: 100%;
+      color: #bbbbbb;
+      font-size: inherit;
+    }
+
+    .dropzone.dragover {
+      margin: 0.5%;
+      font-weight: bold;
+      border-color: #0f5486;
+      color: #0f5486;
+    }
+
+    table {
+      font-family: "Ubuntu", sans-serif;
+      border-collapse: collapse;
+      width: 99%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .button {
+      font-family: "Ubuntu", sans-serif;
+      background-color: #1da9ff;
+      border: none;
+      color: white;
+      margin: 4px;
+      padding: 8px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+      width: 100%;
+      align-items: center;
+      text-align: center;
+      align-self: center;
+    }
+
+    .copied {
+      font-family: "Ubuntu", sans-serif;
+      background-color: #0fc71e;
+      border: none;
+      color: white;
+      margin: 4px;
+      padding: 8px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .button:hover {
+      background-color: #0f5486;
+      color: white;
+    }
+
+    .buttonDownload {
+      font-family: "Ubuntu", sans-serif;
+      background-color: #1da9ff;
+      border: none;
+      color: white;
+      margin: 4px;
+      padding: 8px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+      width: 50%;
+      align-items: center;
+      text-align: center;
+      align-self: center;
+    }
+
+    .buttonDownload:hover {
+      background-color: #0f5486;
+      color: white;
+    }
+
+    .loader {
+      width: 40px;
+      aspect-ratio: 3;
+      align-items: center;
+      text-align: center;
+      align-self: center;
+      --_g: no-repeat
+        radial-gradient(circle closest-side, #ffffff 90%, #ffffff00);
+      background: var(--_g) 10% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+      background-size: calc(100% / 3) 50%;
+      animation: l3 1s infinite linear;
+    }
+    @keyframes l3 {
+      20% {
+        background-position: 0% 0%, 50% 50%, 100% 50%;
+      }
+      40% {
+        background-position: 0% 100%, 50% 0%, 100% 50%;
+      }
+      60% {
+        background-position: 0% 50%, 50% 100%, 100% 0%;
+      }
+      80% {
+        background-position: 0% 50%, 50% 50%, 100% 100%;
+      }
+    }
+
+    /* Text Box */
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1.5px solid #ccc;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      outline: none;
+      border-radius: 8px;
+    }
+
+    input[type="text"]:focus {
+      border: 1.5px solid #0f5486;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      font-family: "Ubuntu", sans-serif;
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0); /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      font-family: "Ubuntu", sans-serif;
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 16px;
+      border: 0.1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+      border-radius: 14px;
+    }
+
+    /* The Close Button */
+    .close {
+      font-family: "Ubuntu", sans-serif;
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      /* margin-right: 8px; */
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Divider */
+    /* Dashed border */
+    hr.dashed {
+      border-top: 3px dashed #bbb;
+    }
+
+    /* Dotted border */
+    hr.dotted {
+      border-top: 3px dotted #bbb;
+    }
+
+    /* Solid border */
+    hr.solid {
+      border-top: 3px solid #bbb;
+    }
+
+    /* Form Menu */
+    * {
+      box-sizing: border-box;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      font-family: "Ubuntu", sans-serif;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    label {
+      font-family: "Ubuntu", sans-serif;
+      padding: 12px 12px 12px 0;
+      display: inline-block;
+    }
+
+    .startDownload {
+      font-family: "Ubuntu", sans-serif;
+      background-color: #1da9ff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      float: right;
+      text-align: center;
+    }
+
+    .startDownload:hover {
+      background-color: #0f5486;
+    }
+
+    .cancelDownload {
+      background-color: #9da5aa;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      float: right;
+      font-family: "Ubuntu", sans-serif;
+      text-align: center;
+    }
+
+    .cancelDownload:hover {
+      background-color: #6e7274;
+    }
+
+    .container {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    .col-25 {
+      float: left;
+      width: 25%;
+      margin-top: 6px;
+    }
+
+    .col-75 {
+      float: left;
+      width: 75%;
+      margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+      .col-25,
+      .col-75,
+      input[type="submit"] {
+        width: 100%;
+        margin-top: 0;
+      }
+    }
+
+    /* Switch */
+    /* The switch - the box around the slider */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196f3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196f3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+
+  <!-- Widget -->
+  <head>
+    <!-- Widget Name -->
+    <title>Widget with web services</title>
+
+    <!-- External Referances -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.1/jszip.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.0.2/jszip-utils.js"></script> -->
+
+    <!-- Meta Definitions -->
+    <meta name="author" content="Selimhan Bek" />
+    <meta name="description" content="Sample Widget Hello World" />
+    <meta name="keywords" content="CAA Use Case" />
+    <meta name="apiVersion" content="1.0" />
+    <meta name="debugMode" content="true" />
+    <meta name="strictMode" content="false" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Widget Preferences -->
+    <widget:preferences name="Preferences">
+      <!-- Multiple choice attribute -->
+      <widget:preference
+        name="ObjectType"
+        type="list"
+        label="Select Object Type"
+        defaultValue="Physical Product"
+      >
+        <widget:option
+          label="Physical Product"
+          value="Physical Product"
+        ></widget:option>
+        <!-- <widget:option label="Drawing" value="Drawing"></widget:option> -->
+      </widget:preference>
+
+      <!-- Multiple choice attribute -->
+      <widget:preference
+        name="CadType"
+        type="list"
+        label="Select CAD Type"
+        defaultValue="Solidworks"
+      >
+        <widget:option label="Solidworks" value="Solidworks"></widget:option>
+        <widget:option label="CATIA" value="CATIA"></widget:option>
+        <!-- <widget:option label="Drawing" value="Drawing"></widget:option> -->
+      </widget:preference>
+
+      <!-- Text attribute -->
+      <!-- <widget:preference
+        name="downloadfolderpath"
+        type="text"
+        label="Download Folder Path"
+        defaultValue="C:\temp"
+      /> -->
+    </widget:preferences>
+
+    <!-- My JS Codes -->
+    <script type="text/javascript">
+      /* External Libraries (AMD Configs) */
+      // require.config({
+      //   paths: {
+      //     ZIPUtils:
+      //       "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.1/jszip.js",
+      //   },
+      // });
+
+      /* Meta Data */
+      let myMetaInfo = widget.metas;
+
+      /* Get Widget Preferences */
+      let downloadFolderPath = widget.getValue("downloadfolderpath");
+      let curType = widget.getValue("ObjectType");
+      let curCADType = widget.getValue("CadType");
+      let curSecurityContext = "";
+
+      /* Basket Items */
+      let basketItems = [];
+      let basketItemsDetails = [];
+
+      /* Platform variables */
+      let baseURL = "";
+      let tenant = "";
+      let userCredentials = "";
+      let eno_csrf_token = "";
+
+      /* Downlads Settings */
+      let downloadName = "";
+      let expandLimit = -1;
+      let totalFileCount = 0;
+
+      /* Initialize Widget */
+      function runWidget() {
+        if (widget) {
+          executeWidgetCode();
+        } else {
+          console.warn("Defered widget is loading...");
+          setTimeout(runWidget, 100); //Wait for widget object to be added correctly
+        }
+      }
+
+      /* Execute widget codes here */
+      function executeWidgetCode() {
+        /* Global Requires */
+        require([
+          "DS/WAFData/WAFData",
+          "DS/i3DXCompassServices/i3DXCompassServices",
+        ], function (WAFData, i3DXCompassServices) {
+          /* My Widget Callbacks */
+          let MyWidget = {
+            onLoad: function () {
+              /* Clear Widget */
+              widget.body.innerHTML = "";
+
+              /* Get platform services */
+              MyWidget.getPlatformServices();
+
+              /* Update SecurityContext */
+              MyWidget.updateSecurityContext();
+
+              /* Create a drop area */
+              MyWidget.createDropArea();
+
+              /* Drag & Drop Settings */
+              MyWidget.onDragDrop();
+            },
+            onRefresh: function () {
+              /* Clear Widget Body */
+              widget.body.innerHTML = "";
+              downloadName = "";
+              expandLimit = -1;
+
+              /* Clear basket items */
+              MyWidget.clearBasket();
+
+              /* Get platform services */
+              MyWidget.getPlatformServices();
+
+              /* Update widget preferences */
+              MyWidget.updatePreferences();
+
+              /* Create a drop area */
+              MyWidget.createDropArea();
+
+              /* Drag & Drop Settings */
+              MyWidget.onDragDrop();
+            },
+            createDropArea: function () {
+              /* Create an element */
+              let dr = document.createElement("div");
+              dr.className = "dropzone";
+              dr.id = "dropzone";
+              dr.innerHTML = "Drop Here";
+
+              /* add to widget body*/
+              widget.body.appendChild(dr);
+            },
+            createNewDataTable: function () {
+              try {
+                if (basketItems.length > 0) {
+                  /* Create a new table */
+                  let tbl = document.createElement("table");
+                  tbl.className = "table";
+                  tbl.id = "basketTable";
+
+                  /* Create first row */
+                  let firstRow = document.createElement("tr");
+
+                  let xDisplayName = document.createElement("th");
+                  xDisplayName.style = "font-weight:bold";
+                  xDisplayName.innerHTML = "Name";
+                  let xDisplayType = document.createElement("th");
+                  xDisplayType.style = "font-weight:bold";
+                  xDisplayType.innerHTML = "Type";
+                  let xActionGetInfo = document.createElement("th");
+                  xActionGetInfo.style = "font-weight:bold";
+                  xActionGetInfo.innerHTML = "Action (Copy JSON)";
+
+                  firstRow.appendChild(xDisplayName);
+                  firstRow.appendChild(xDisplayType);
+                  firstRow.appendChild(xActionGetInfo);
+
+                  tbl.appendChild(firstRow);
+
+                  /* Create data rows */
+                  for (let i = 0; i < basketItems.length; i++) {
+                    const obj = basketItems[i];
+
+                    let newRow = document.createElement("tr");
+                    newRow.id = "row_" + i;
+
+                    let a1 = document.createElement("th");
+                    a1.innerHTML = obj.displayName;
+                    let a2 = document.createElement("th");
+                    a2.innerHTML = obj.displayType;
+
+                    let a3 = document.createElement("th");
+
+                    /* Get Info Buttons */
+                    let btnGetInfo = document.createElement("button");
+                    btnGetInfo.className = "button";
+                    btnGetInfo.id = "btn_GetInfo_" + i;
+                    btnGetInfo.innerHTML = "Get Info";
+                    btnGetInfo.onclick = function () {
+                      this.innerHTML = '<div class="loader"></div>';
+                      MyWidget.getEngObjDetailsInfo(
+                        obj.objectId,
+                        btnGetInfo.id
+                      );
+                    };
+
+                    a3.appendChild(btnGetInfo);
+
+                    newRow.appendChild(a1);
+                    newRow.appendChild(a2);
+                    newRow.appendChild(a3);
+
+                    tbl.appendChild(newRow);
+                  }
+
+                  /* Update Dropzone State*/
+                  let drpzne = document.getElementById("dropzone");
+                  drpzne.innerHTML = "";
+                  drpzne.appendChild(tbl);
+
+                  /* Add Info details */
+                  let endinfo = document.createElement("div");
+                  endinfo.className = "infoendwidget";
+                  endinfo.innerHTML = "Total Items: " + basketItems.length;
+                  drpzne.appendChild(endinfo);
+
+                  /* Download All Button */
+                  let dwnAll = document.createElement("div");
+                  let btnDownloadAll = document.createElement("button");
+
+                  dwnAll.style = "width:100%;text-align:center;";
+                  btnDownloadAll.id = "btnDownloadAll";
+                  btnDownloadAll.className = "buttonDownload";
+                  btnDownloadAll.innerHTML = "Download All";
+                  btnDownloadAll.onclick = function () {
+                    this.innerHTML = '<div class="loader"></div>';
+                    MyWidget.downloadProducts();
+                  };
+
+                  dwnAll.appendChild(btnDownloadAll);
+                  drpzne.appendChild(dwnAll);
+                }
+              } catch (error) {
+                console.log(error.toString());
+              }
+            },
+            clearBasket: function () {
+              /* Clear the all basket items in array */
+              basketItems = [];
+            },
+            onDragDrop: function () {
+              /* Set Dropzone */
+              let dropzone = document.getElementById("dropzone");
+
+              /* On drop start */
+              dropzone.ondrop = function (e) {
+                e.preventDefault();
+
+                this.className =
+                  basketItems.length == 0 ? "dropzone" : "basket";
+              };
+
+              /* On drag over */
+              dropzone.ondragover = function () {
+                let curEl = document.getElementById("dropzone");
+                curEl.innerHTML = "Drop Here";
+                this.className = "dropzone dragover";
+                return false;
+              };
+
+              /* On drag leave */
+              dropzone.ondragleave = function () {
+                if (basketItems.length == 0) {
+                  this.className = "dropzone";
+                } else {
+                  this.className = "basket";
+                  MyWidget.createNewDataTable();
+                }
+              };
+
+              /* On drop completed */
+              dropzone.ondrop = function (event) {
+                /* Get string data to JSON */
+                const data = event.dataTransfer.getData("text"); // text/plain
+                const obj = JSON.parse(data);
+                console.log(obj.data.items);
+
+                /* Check Basket Items and Types, then push if doesn't exist */
+                for (let i = 0; i < obj.data.items.length; i++) {
+                  const e = obj.data.items[i];
+
+                  /* Check is Exist ? */
+                  let isExist = MyWidget.checkItemIsExistInBasket(
+                    e.objectId,
+                    e.displayName
+                  );
+
+                  if (!isExist) {
+                    /* Is Object type */
+                    if (e.displayType == curType) {
+                      basketItems.push(e);
+                    } else if (curType == "VPMReference") {
+                      if (
+                        e.displayType == "Physical Product" ||
+                        e.displayType == "VPMReference"
+                      ) {
+                        basketItems.push(e);
+                      }
+                    }
+                  }
+                }
+
+                /* End event */
+                event.preventDefault();
+                this.className =
+                  basketItems.length == 0 ? "dropzone" : "basket";
+
+                /* Create a new table */
+                MyWidget.createNewDataTable();
+              };
+            },
+            onKeyboardAction: function (key) {
+              /* Is clicked enter? */
+              if (key == 13) {
+              }
+            },
+            getPlatformServices: function () {
+              /* Connect to Compass Service for collect credentials */
+              i3DXCompassServices.getServiceUrl({
+                serviceName: "3DSpace",
+                platformId: widget.getValue("x3dPlatformId"),
+                onComplete: function (data) {
+                  /* Save the baseURL */
+                  baseURL = data;
+
+                  /* Update Tenant */
+                  MyWidget.updateTenant();
+                },
+                onFailure: function () {
+                  console.warn(
+                    "An error occured connect to compass services..."
+                  );
+                },
+              });
+            },
+            updatePreferences: function () {
+              /* Update all preferences */
+              downloadFolderPath = widget.getValue("downloadfolderpath");
+              curType = widget.getValue("ObjectType");
+              curSecurityContext = widget.getValue("SecurityContextPref");
+              curCADType = widget.getValue("CadType");
+
+              console.log(userCredentials);
+            },
+            updateSecurityContext: function () {
+              /* Connect to compass service */
+              i3DXCompassServices.getServiceUrl({
+                serviceName: "3DSpace",
+                platformId: widget.getValue("x3dPlatformId"),
+                onComplete: function (serviceUrl) {
+                  /* Create a new url */
+                  const url =
+                    serviceUrl +
+                    "/resources/modeler/pno/person?current=true&select=firstname&select=lastname&select=email&select=address&select=phone&select=isactive&select=company&select=collabspaces&select=preferredcredentials";
+
+                  /* Send a request */
+                  WAFData.authenticatedRequest(url, {
+                    method: "GET",
+                    type: "json",
+
+                    onComplete: function (userInfo) {
+                      /* Save user credential */
+                      userCredentials = userInfo;
+
+                      /* All allowed security context list */
+                      let arr = [];
+
+                      /* User preffered SecurityContext */
+                      let prefferedCS =
+                        userCredentials.preferredcredentials.role.name +
+                        "." +
+                        userCredentials.preferredcredentials.organization.name +
+                        "." +
+                        userCredentials.preferredcredentials.collabspace.name;
+
+                      /* Parse collaborative spaces */
+                      try {
+                        /* Parse all collaborative spaces as widget preferences */
+                        for (
+                          let i = 0;
+                          i < userCredentials.collabspaces.length;
+                          i++
+                        ) {
+                          const cs = userCredentials.collabspaces[i];
+
+                          for (let j = 0; j < cs.couples.length; j++) {
+                            const e = cs.couples[j];
+                            const curSC =
+                              e.role.name +
+                              "." +
+                              e.organization.name +
+                              "." +
+                              cs.name;
+
+                            arr.push({
+                              label: cs.name + "." + e.role.name,
+                              value: curSC,
+                            });
+                          }
+                        }
+                      } catch (error) {
+                        console.warn(error);
+                        arr = [
+                          {
+                            label:
+                              prefferedCS.split(".")[2] +
+                              "." +
+                              prefferedCS.split(".")[0],
+                            value: prefferedCS,
+                          },
+                        ];
+                      }
+
+                      /* Create a new widget preferences for active security context */
+                      widget.addPreference({
+                        name: "SecurityContextPref",
+                        type: "list",
+                        label:
+                          "Current Security Context (Active Collaborative Space)",
+                        options: arr,
+                        defaultValue: prefferedCS,
+                      });
+
+                      /* Update Preferences */
+                      MyWidget.updatePreferences();
+                    },
+                    onFailure: function () {
+                      console.warn(
+                        "An error occured connect to compass services..."
+                      );
+                    },
+                    onPassportError: function () {
+                      widget.body.innerHTML =
+                        "An error occured with 3DPassport. Please delete this widget and reopen the browser, reauthenticate then reopen this widget.";
+                    },
+                    onTimeout: function () {
+                      widget.body.innerHTML =
+                        "Server timeout. Please delete this widget, then reopen this widget.";
+                    },
+                  });
+                },
+                onFailure: function () {
+                  console.warn(
+                    "An error occured connect to compass services..."
+                  );
+                },
+              });
+            },
+            updateTenant: function () {
+              /* Connect to compass service */
+              i3DXCompassServices.getServiceUrl({
+                serviceName: "3DSpace",
+                platformId: widget.getValue("PlatFormInstanceId"),
+                onComplete: function (pfs) {
+                  let tenantNo = "";
+                  for (let i = 0; i < pfs.length; i++) {
+                    if (pfs[i].url == baseURL) {
+                      tenantNo = pfs[i].platformId;
+                    }
+                  }
+
+                  tenant = tenantNo;
+                },
+                onFailure: function () {
+                  console.warn(
+                    "An error occured connect to compass services..."
+                  );
+                },
+              });
+            },
+            getEngObjDetailsInfo: function (pid, btnID) {
+              /* Create an url */
+              const url =
+                baseURL +
+                "/resources/v1/modeler/dseng/dseng:EngItem/" +
+                pid +
+                "?$mask=dsmveng:EngItemMask.Details";
+
+              /* Create a new request */
+              WAFData.authenticatedRequest(url, {
+                method: "GET",
+                type: "json",
+                headers: {
+                  SecurityContext: curSecurityContext,
+                },
+
+                onComplete: function (details, headers) {
+                  /* Copy response to Clipboard */
+                  console.log(details.member[0]);
+                  let str = JSON.stringify(details.member[0]);
+                  navigator.clipboard.writeText(str);
+
+                  /* Change Button CSS */
+                  if (btnID != "") {
+                    let curBtn = document.getElementById(btnID);
+                    curBtn.className = "copied";
+                    curBtn.innerHTML = "Copied";
+                  }
+
+                  alert("Copied to clipboard successfully!");
+                },
+                onFailure: function () {
+                  alert(
+                    "Please check widget preferences, object type must be Physical Product or VPMReference"
+                  );
+                  /* Change Button CSS */
+                  if (btnID != "") {
+                    let curBtn = document.getElementById(btnID);
+                    curBtn.className = "button";
+                    curBtn.innerHTML = "Get Info";
+                  }
+                  console.warn(
+                    "An error occured connect to compass services..."
+                  );
+                },
+                onPassportError: function () {
+                  widget.body.innerHTML =
+                    "An error occured with 3DPassport. Please delete this widget and reopen the browser, reauthenticate then reopen this widget.";
+                },
+                onTimeout: function () {
+                  widget.body.innerHTML =
+                    "Server timeout. Please delete this widget, then reopen this widget.";
+                },
+              });
+            },
+            checkItemIsExistInBasket: function (id, name) {
+              for (let i = 0; i < basketItems.length; i++) {
+                const element = basketItems[i];
+                if (element.objectId == id && element.displayName == name) {
+                  return true;
+                }
+              }
+              return false;
+            },
+            createDownloadTicket: function (pid, dsxcad, btnID) {
+              // dsxcads: Part, Product, Drawing, Representation, FamilyRepresentation, 3DShape
+              /* GET ENO CSRF TOKEN */
+              const urlCSRF =
+                baseURL + "/resources/v1/application/CSRF?tenant=" + tenant;
+
+              /* Create a request for ENO_CSRF_TOKEN */
+              WAFData.authenticatedRequest(urlCSRF, {
+                method: "GET",
+                type: "json",
+
+                onComplete: function (details) {
+                  /* Copy response to Clipboard */
+                  const enoTicket = details.csrf.value;
+                  console.log("1 - " + enoTicket);
+
+                  /* Create Download Ticket */
+                  const urlDownload =
+                    baseURL +
+                    "/resources/v1/modeler/dsxcad/dsxcad:" +
+                    dsxcad +
+                    "/" +
+                    pid +
+                    "/dsxcad:AuthoringFile/DownloadTicket";
+                  console.log("2 - " + urlDownload);
+                  console.log("3 - " + curSecurityContext);
+
+                  /* Create request for download ticket */
+                  WAFData.authenticatedRequest(urlDownload, {
+                    method: "POST",
+                    type: "json",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Accept: "application/json",
+                      SecurityContext: curSecurityContext,
+                      ENO_CSRF_TOKEN: enoTicket,
+                    },
+
+                    onComplete: function (details, header) {
+                      console.log(details);
+
+                      /* Change Button CSS */
+                      if (btnID != "") {
+                        let curBtn = document.getElementById(btnID);
+                        curBtn.className = "copied";
+                        curBtn.innerHTML = "Completed";
+                      }
+
+                      alert(details.filename);
+                    },
+                    onFailure: function () {
+                      alert("Ups! Download failed...");
+                      /* Change Button CSS */
+                      if (btnID != "") {
+                        let curBtn = document.getElementById(btnID);
+                        curBtn.className = "button";
+                        curBtn.innerHTML = "Download";
+                      }
+                      console.warn(
+                        "An error occured connect to compass services..."
+                      );
+                    },
+                    onPassportError: function () {
+                      widget.body.innerHTML =
+                        "An error occured with 3DPassport. Please delete this widget and reopen the browser, reauthenticate then reopen this widget.";
+                    },
+                    onTimeout: function () {
+                      widget.body.innerHTML =
+                        "Server timeout. Please delete this widget, then reopen this widget.";
+                    },
+                  });
+                },
+                onFailure: function () {
+                  alert(
+                    "Please check widget preferences, object type must be Physical Product or VPMReference"
+                  );
+                  console.warn(
+                    "An error occured connect to compass services..."
+                  );
+                },
+                onPassportError: function () {
+                  widget.body.innerHTML =
+                    "An error occured with 3DPassport. Please delete this widget and reopen the browser, reauthenticate then reopen this widget.";
+                },
+                onTimeout: function () {
+                  widget.body.innerHTML =
+                    "Server timeout. Please delete this widget, then reopen this widget.";
+                },
+              });
+            },
+            downloadProducts: function () {
+              /* Start Download */
+              if (downloadName != "") {
+                MyWidget.startDownload();
+                return;
+              }
+
+              /* Update CSS */
+              let btn = document.getElementById("btnDownloadAll");
+
+              /* Loading */
+              btn.innerHTML = '<div class="loader"></div>';
+
+              /* Create a menu */
+              let row0 = document.createElement("div");
+              let divHeader = document.createElement("div");
+              let divClose = document.createElement("div");
+              row0.className = "row";
+              divHeader.className = "col-75";
+              divClose.className = "col-25";
+
+              let modal = document.createElement("div");
+              let modalContent = document.createElement("div");
+              let close = document.createElement("span");
+              let header = document.createElement("p");
+              let hr1 = document.createElement("hr");
+              let hr2 = document.createElement("hr");
+              let alittlespace = document.createElement("div");
+              let alittlewidth = document.createElement("div");
+              alittlespace.style = "height:30px;";
+              alittlewidth.style = "width:10px;height:10px;float:right;";
+
+              /* Definitions */
+              modal.id = "myModal";
+              modal.className = "modal";
+              modalContent.className = "modal-content";
+              close.className = "close";
+              close.innerHTML = "&times;";
+              header.innerHTML = "<h4>Download Physical Products</h4>";
+              hr1.className = "hr.solid";
+              divHeader.appendChild(header);
+              divClose.appendChild(close);
+              row0.appendChild(divHeader);
+              row0.appendChild(divClose);
+
+              //#region Settings Form
+              let row1 = document.createElement("div");
+              row1.className = "row";
+              let des1 = document.createElement("div");
+              des1.className = "col-25";
+              des1.innerHTML = '<label style="font-weight:bold;">Title</label>';
+              let input1Div = document.createElement("div");
+              input1Div.className = "col-75";
+              let input1 = document.createElement("input");
+              input1.id = "exportTitle";
+              input1.placeholder = "Title must not be empty...";
+              input1.type = "text";
+              input1.value =
+                basketItems.length == 1
+                  ? basketItems[0].displayName.toString()
+                  : "Export_" + Date.now().toString();
+
+              row1.appendChild(des1);
+              input1Div.appendChild(input1);
+              row1.appendChild(input1Div);
+
+              let row2 = document.createElement("div");
+              row2.className = "row";
+              let des2 = document.createElement("div");
+              des2.className = "col-25";
+              des2.innerHTML =
+                '<label style="font-weight:bold;">İnclude all drawings</label>';
+              let switch1Div = document.createElement("div");
+              let switch1 = document.createElement("label");
+              let switch1Input = document.createElement("input");
+              let switch1Span = document.createElement("span");
+              switch1.className = "switch";
+              switch1Div.className = "col-75";
+              switch1Input.type = "checkbox";
+              switch1Input.id = "switch1";
+              switch1Span.className = "slider round";
+
+              switch1.appendChild(switch1Input);
+              switch1.appendChild(switch1Span);
+              switch1Div.appendChild(switch1);
+              row2.appendChild(des2);
+              row2.appendChild(switch1Div);
+
+              let row3 = document.createElement("div");
+              row3.className = "row";
+              let des3 = document.createElement("div");
+              des3.className = "col-25";
+              des3.innerHTML =
+                '<label style="font-weight:bold;">Expand level</label>';
+              let select1Div = document.createElement("div");
+              select1Div.className = "col-75";
+              let select1 = document.createElement("select");
+              select1.id = "select1";
+              select1.name = "Expand Level";
+              select1.innerHTML =
+                '<option value="all">Expand all</option><option value="a0">Expand none</option><option value="a1">1</option><option value="a2">2</option><option value="a3">3</option><option value="a4">4</option><option value="a5">5</option>';
+
+              select1Div.appendChild(select1);
+              row3.appendChild(des3);
+              row3.appendChild(select1Div);
+
+              let row4 = document.createElement("div");
+              row4.className = "row";
+              let btnStartDownload = document.createElement("button");
+              let btnCancelDownload = document.createElement("button");
+
+              btnStartDownload.innerHTML = "Download";
+              btnStartDownload.className = "startDownload";
+              btnStartDownload.id = "btnStartDownload";
+              btnCancelDownload.innerHTML = "Cancel";
+              btnCancelDownload.className = "cancelDownload";
+              btnCancelDownload.id = "btnCancelDownload";
+              btnCancelDownload.onclick = function () {
+                modal.style.display = "none";
+                widget.body.removeChild(document.getElementById("myModal"));
+                btn.innerHTML = "Download All";
+              };
+              btnStartDownload.onclick = function () {
+                /* Collect the user choices */
+                let title = widget.body.getElementById("exportTitle").value;
+                let includeDrawing =
+                  widget.body.getElementById("switch1").checked;
+                let expandLevelType =
+                  widget.body.getElementById("select1").value;
+
+                /* Define Expand Level */
+                if (expandLevelType == "all") {
+                  expandLimit = -1;
+                } else if (expandLevelType == "a0") {
+                  expandLimit = 0;
+                } else if (expandLevelType == "a1") {
+                  expandLimit = 1;
+                } else if (expandLevelType == "a2") {
+                  expandLimit = 2;
+                } else if (expandLevelType == "a3") {
+                  expandLimit = 3;
+                } else if (expandLevelType == "a4") {
+                  expandLimit = 4;
+                } else if (expandLevelType == "a5") {
+                  expandLimit = 5;
+                }
+
+                /* Title can not be empty */
+                if (title == "") {
+                  console.error("title must not be empty...");
+                  alert("title must not be empty...");
+                  return;
+                }
+
+                /* Save Download Settings */
+                downloadName = title;
+
+                /* Let's Begin */
+                for (let i = 0; i < basketItems.length; i++) {
+                  MyWidget.getAllInstances(
+                    MyWidget.createTreeObject(
+                      basketItems[i].objectId,
+                      basketItems[i].displayName,
+                      "dsxcad:Product",
+                      0,
+                      []
+                    ),
+                    includeDrawing
+                  );
+                }
+
+                /* Close Dialog */
+                modal.style.display = "none";
+                widget.body.removeChild(document.getElementById("myModal"));
+                btn.innerHTML = "Download Ready!";
+
+                /* End Process */
+                console.log({
+                  title: title,
+                  includeDrawing: includeDrawing,
+                  expandCount: expandLevelType,
+                });
+              };
+
+              row4.appendChild(btnCancelDownload);
+              row4.appendChild(alittlewidth);
+              row4.appendChild(btnStartDownload);
+              //#endregion Settings Form
+
+              /* Appends */
+              modalContent.appendChild(row0);
+              modalContent.appendChild(hr1);
+              modalContent.appendChild(row1);
+              modalContent.appendChild(row2);
+              modalContent.appendChild(hr2);
+              modalContent.appendChild(row3);
+              modalContent.appendChild(alittlespace);
+              modalContent.appendChild(row4);
+
+              /* Render Form */
+              modal.appendChild(modalContent);
+              widget.body.appendChild(modal);
+
+              //#region Events
+              // When the user clicks on <span> (x), close the modal
+              close.onclick = function () {
+                modal.style.display = "none";
+                widget.body.removeChild(document.getElementById("myModal"));
+                btn.innerHTML = "Download All";
+              };
+
+              // When the user clicks anywhere outside of the modal, close it
+              window.onclick = function (event) {
+                if (event.target == modal) {
+                  modal.style.display = "none";
+                  widget.body.removeChild(document.getElementById("myModal"));
+                  btn.innerHTML = "Download All";
+                }
+              };
+              //#endregion Events
+
+              /* Call Modal */
+              modal.style.display = "block";
+            },
+            getInstanceURL: function (id) {
+              // MASKS: dskern:Mask.Default, dsmveng:EngInstanceMask.Details, dsmveng:EngInstanceMask.Filterable, dsmveng:EngInstanceMask.Position
+              // FIELDS: dsmveno:SupportedTypes, dsmveno:CustomerAttributes, dsmvcfg:attribute.hasConfiguredInstance
+              return (
+                baseURL +
+                "/resources/v1/modeler/dseng/dseng:EngItem/" +
+                id.toString() +
+                "/dseng:EngInstance?$mask=dsmveng:EngInstanceMask.Details"
+              );
+            },
+            getDownloadTicketURL: function (id, dsxcad) {
+              return (
+                baseURL +
+                "/resources/v1/modeler/dsxcad/" +
+                dsxcad +
+                "/" +
+                id +
+                "/dsxcad:AuthoringFile/DownloadTicket"
+              );
+            },
+            getCSRFTokenURL: function () {
+              return (
+                baseURL + "/resources/v1/application/CSRF?tenant=" + tenant
+              );
+            },
+            createTreeObject: function (id, name, dsxcad, level, children) {
+              return {
+                id: id,
+                name: name,
+                dsxcad: dsxcad, //"dsxcad:Product",
+                level: level,
+                children: children, // [],
+                downloadTicket: {
+                  name: "",
+                  url: "",
+                },
+                drawings: [],
+              };
+            },
+            getAllInstances: function (obj, isDrawing) {
+              WAFData.authenticatedRequest(MyWidget.getInstanceURL(obj.id), {
+                method: "GET",
+                type: "json",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  SecurityContext: curSecurityContext,
+                },
+                onComplete: function (details, headers) {
+                  console.log(details);
+
+                  /* Update Total File Count */
+                  totalFileCount = totalFileCount + details.length;
+
+                  /* Please locate Family represantation for SW files */
+                  for (let i = 0; i < details.member.length; i++) {
+                    let e = details.member[i];
+                    let newChild = MyWidget.createTreeObject(
+                      e.referencedObject.id,
+                      e.name,
+                      e.referencedObject.type,
+                      obj.level + 1,
+                      []
+                    );
+
+                    if (expandLimit == -1) {
+                      if (e.referencedObject.type == "dsxcad:Product") {
+                        MyWidget.pushProduct(newChild, obj.children, isDrawing);
+                      } else if (e.referencedObject.type == "dsxcad:Part") {
+                        MyWidget.pushParts(newChild, obj.children, isDrawing);
+                      }
+                    } else if (
+                      !(expandLimit != -1 && newChild.level <= expandLimit)
+                    ) {
+                      if (e.referencedObject.type == "dsxcad:Product") {
+                        MyWidget.pushProduct(newChild, obj.children, isDrawing);
+                      } else if (e.referencedObject.type == "dsxcad:Part") {
+                        MyWidget.pushParts(newChild, obj.children, isDrawing);
+                      }
+                    }
+
+                    /* JOB DOWNLOADS */
+                    if (obj.level == 0) {
+                      if (!MyWidget.checkItemExistInBasketDetails(obj.id)) {
+                        basketItemsDetails.push(obj);
+                        MyWidget.createDownloadTicket(obj);
+                        MyWidget.getDrawingDownloadTickets(obj);
+                      }
+                    }
+                  }
+
+                  console.log(obj);
+                },
+                onFailure: function () {
+                  console.error("An error occured while getting instances...");
+                },
+              });
+            },
+            checkItemExistInBasketDetails: function (id) {
+              for (let a = 0; a < basketItemsDetails.length; a++) {
+                if (basketItemsDetails[a].id == id) {
+                  return true;
+                }
+              }
+              return false;
+            },
+            pushParts: function (refPart, arr, isDrawing) {
+              arr.push(refPart);
+              MyWidget.createDownloadTicket(refPart);
+              if (isDrawing) {
+                MyWidget.getDrawingDownloadTickets(refPart);
+              }
+            },
+            pushProduct: function (refProduct, arr, isDrawing) {
+              arr.push(refProduct);
+              MyWidget.createDownloadTicket(refProduct);
+              MyWidget.getAllInstances(refProduct, isDrawing);
+              if (isDrawing) {
+                MyWidget.getDrawingDownloadTickets(refProduct);
+              }
+            },
+            generateLocateFamilyURL: function () {
+              return (
+                baseURL +
+                "/resources/v1/modeler/dsxcad/dsxcad:FamilyRepresentation/locate"
+              );
+            },
+            downloadTicketForSW: function (locateObject) {
+              /* Get eno_csrf_token */
+              WAFData.authenticatedRequest(MyWidget.getCSRFTokenURL(), {
+                method: "GET",
+                type: "json",
+
+                onComplete: function (details) {
+                  let locateEno = details.csrf.value;
+
+                  /* Set Locate Request Body */
+                  let locateReqBody = [
+                    {
+                      source: "$3DSpace",
+                      type: "VPMReference",
+                      identifier: locateObject.id.toString(),
+                      relativePath:
+                        "/resource/v1/dseng/dseng:EngItem/" +
+                        locateObject.id.toString(),
+                    },
+                  ];
+
+                  /* Locate the Family Representation */
+                  WAFData.authenticatedRequest(
+                    MyWidget.generateLocateFamilyURL(),
+                    {
+                      method: "POST",
+                      type: "json",
+                      data: JSON.stringify(locateReqBody),
+                      headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        SecurityContext: curSecurityContext,
+                        ENO_CSRF_TOKEN: locateEno,
+                      },
+
+                      onComplete: function (details, headers) {
+                        let repID = details.member[0].representation.identifier;
+
+                        if (
+                          repID == "" ||
+                          repID == null ||
+                          repID == undefined
+                        ) {
+                          return;
+                        }
+
+                        /* Get download Ticket */
+                        WAFData.authenticatedRequest(
+                          MyWidget.getDownloadTicketURL(
+                            repID,
+                            "dsxcad:FamilyRepresentation"
+                          ),
+                          {
+                            method: "POST",
+                            type: "json",
+                            headers: {
+                              "Content-Type": "application/json",
+                              Accept: "application/json",
+                              SecurityContext: curSecurityContext,
+                              ENO_CSRF_TOKEN: locateEno,
+                            },
+
+                            onComplete: function (details, headers) {
+                              locateObject.downloadTicket = {
+                                name: details.filename,
+                                url:
+                                  details.ticketURL +
+                                  "?" +
+                                  details.jobticket +
+                                  "=" +
+                                  encodeURIComponent(details.ticket),
+                              };
+                            },
+                            onFailure: function () {
+                              console.error(
+                                "an error occured while getting download ticket for FAMILY REPRESENTATION url; REF NAME: " +
+                                  locateObject.name
+                              );
+                            },
+                          }
+                        );
+                      },
+                      onFailure: function (
+                        error,
+                        backendresponse,
+                        response_hdrs
+                      ) {
+                        console.error(
+                          "an error occured while locating family representation.."
+                        );
+                        console.warn({
+                          error: error,
+                          backendresponse: backendresponse,
+                          response_hdrs: response_hdrs,
+                        });
+                      },
+                    }
+                  );
+                },
+                onFailure: function () {
+                  console.error(
+                    "an error occured while getting eno csrf token..."
+                  );
+                },
+              });
+            },
+            createDownloadTicket: function (currentRef) {
+              /* If CADType equal to Solidworks */
+              if (curCADType == "Solidworks") {
+                MyWidget.downloadTicketForSW(currentRef);
+                return;
+              }
+
+              /* Get eno_csrf_token */
+              WAFData.authenticatedRequest(MyWidget.getCSRFTokenURL(), {
+                method: "GET",
+                type: "json",
+                onComplete: function (details) {
+                  let maTicket = details.csrf.value;
+
+                  /* Get Download Ticket */
+                  WAFData.authenticatedRequest(
+                    MyWidget.getDownloadTicketURL(
+                      currentRef.id,
+                      currentRef.dsxcad
+                    ),
+                    {
+                      method: "POST",
+                      type: "json",
+                      headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        SecurityContext: curSecurityContext,
+                        ENO_CSRF_TOKEN: maTicket,
+                      },
+                      onComplete: function (details, headers) {
+                        currentRef.downloadTicket = {
+                          name: details.filename,
+                          url:
+                            details.ticketURL +
+                            "?" +
+                            details.jobticket +
+                            "=" +
+                            encodeURIComponent(details.ticket),
+                        };
+                      },
+                      onFailure: function () {
+                        console.error(
+                          "an error occured while getting download ticket url; REF NAME: " +
+                            currentRef.name
+                        );
+                      },
+                    }
+                  );
+                },
+                onFailure: function () {
+                  console.error(
+                    "an error occured while getting eno csrf token..."
+                  );
+                },
+              });
+            },
+            generateSearchDrawingURL: function (srcStr) {
+              return (
+                baseURL +
+                "/resources/v1/modeler/dsdrw/dsdrw:Drawing/Search?$mask=dsmvdrw:DrawingMask.Details&$top=999&$skip=0&$searchStr=" +
+                srcStr
+              );
+            },
+            getDrawingDownloadTickets: function (prodDrw) {
+              /* Search Drawings */
+              WAFData.authenticatedRequest(
+                MyWidget.generateSearchDrawingURL(prodDrw.name),
+                {
+                  method: "GET",
+                  type: "json",
+                  headers: {
+                    // "Content-Type": "application/json",
+                    // Accept: "application/json",
+                    SecurityContext: curSecurityContext,
+                  },
+                  onComplete: function (details, headers) {
+                    if (details.totalItems > 0) {
+                      /* Generate download ticket for searched drawings */
+                      let drws = details.member;
+
+                      /* Download Requests */
+                      for (let i = 0; i < drws.length; i++) {
+                        let element = drws[i];
+
+                        /* Get eno_csrf_token */
+                        WAFData.authenticatedRequest(
+                          MyWidget.getCSRFTokenURL(),
+                          {
+                            method: "GET",
+                            type: "json",
+                            onComplete: function (details) {
+                              let maTicket = details.csrf.value;
+
+                              /* Create a Download Ticket */
+                              WAFData.authenticatedRequest(
+                                MyWidget.getDownloadTicketURL(
+                                  element.id,
+                                  "dsxcad:Drawing"
+                                ),
+                                {
+                                  method: "POST",
+                                  type: "json",
+                                  headers: {
+                                    "Content-Type": "application/json",
+                                    Accept: "application/json",
+                                    SecurityContext: curSecurityContext,
+                                    ENO_CSRF_TOKEN: maTicket,
+                                  },
+                                  onComplete: function (details, headers) {
+                                    let downloadTicket = {
+                                      name: details.filename,
+                                      url:
+                                        details.ticketURL +
+                                        "?" +
+                                        details.jobticket +
+                                        "=" +
+                                        encodeURIComponent(details.ticket),
+                                    };
+
+                                    console.log("HEY I FOUND SOME DRAWINGS");
+                                    console.log({
+                                      info: element,
+                                      downloadTicket: downloadTicket,
+                                    });
+                                    prodDrw.drawings.push({
+                                      info: element,
+                                      downloadTicket: downloadTicket,
+                                    });
+                                  },
+                                  onFailure: function () {
+                                    console.error(
+                                      "an error occured while getting download ticket url; REF NAME: " +
+                                        element.name
+                                    );
+                                  },
+                                }
+                              );
+                            },
+                            onFailure: function () {
+                              console.error(
+                                "an error occured while getting eno csrf token..."
+                              );
+                            },
+                          }
+                        );
+                      }
+                    }
+                  },
+                  onFailure: function () {
+                    console.error(
+                      "an error occured while searching drawings... REF NAME: "
+                    );
+                    console.error(prodDrw);
+                  },
+                }
+              );
+            },
+            startDownload: function () {
+              console.log(basketItemsDetails);
+
+              /* Update CSS */
+              let btn = document.getElementById("btnDownloadAll");
+              btn.className = "copied";
+              btn.innerHTML = "Download Completed";
+
+              let downloadTicket = {
+                totalItemCount: totalFileCount,
+                totalFolder: basketItemsDetails.length,
+                items: basketItemsDetails,
+              };
+
+              // create an anchor element
+              const a = document.createElement("a");
+              // store the data in a blob
+              const file = new Blob([JSON.stringify(downloadTicket)], {
+                type: "text/plain",
+              });
+              // set the link of the anchor element to the blob containing the data we've stored
+              // (most browsers should automatically initiate a download because this link is a blob)
+              a.setAttribute("href", URL.createObjectURL(file));
+              // set the name of the file to be downloaded
+              a.setAttribute("download", downloadName + ".json");
+              // 'click' the anchor element causing the download to start
+              a.click();
+              // just a clean up step
+              URL.revokeObjectURL(a.getAttribute("href"));
+
+              /* ------ JSZip ------- */
+              // zip.file(
+              //   "download-tickets.json",
+              //   JSON.stringify(basketItemsDetails)
+              // );
+
+              // zip.generateAsync({ type: "blob" }).then(function (content) {
+              //   // see FileSaver.js
+              //   saveAs(content, downloadName + ".zip");
+              // });
+            },
+          };
+
+          /* Add events to widget */
+          widget.addEvents({
+            onLoad: MyWidget.onLoad,
+            onRefresh: MyWidget.onRefresh,
+            onDragDrop: MyWidget.onDragDrop,
+            onKeyboardAction: MyWidget.onKeyboardAction,
+            clearBasket: MyWidget.clearBasket,
+            createDropArea: MyWidget.createDropArea,
+            getPlatformServices: MyWidget.getPlatformServices,
+            updatePreferences: MyWidget.updatePreferences,
+            updateSecurityContext: MyWidget.updateSecurityContext,
+            updateTenant: MyWidget.updateTenant,
+          });
+        });
+      }
+
+      /* Run Widget*/
+      runWidget();
+    </script>
+  </head>
+  <body></body>
+</html>
